@@ -53,14 +53,24 @@ function addMessage(role, content, messageId = null) {
     
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
-    avatar.textContent = role === 'user' ? '👤' : '🤖';
+    if (role === 'user') {
+        avatar.innerHTML = '<img src="client.svg" alt="User" class="avatar-icon">';
+    } else {
+        avatar.innerHTML = '<img src="robot.svg" alt="AI" class="avatar-icon">';
+    }
     
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
     
     const textDiv = document.createElement('div');
     textDiv.className = 'message-text';
-    textDiv.textContent = content;
+    if (role === 'assistant') {
+        // AI回复使用Markdown渲染
+        textDiv.innerHTML = marked.parse(content);
+    } else {
+        // 用户消息保持纯文本
+        textDiv.textContent = content;
+    }
     
     contentDiv.appendChild(textDiv);
     messageDiv.appendChild(avatar);
@@ -81,7 +91,7 @@ function showTypingIndicator() {
     const typingDiv = document.createElement('div');
     typingDiv.className = 'message assistant typing';
     typingDiv.innerHTML = `
-        <div class="message-avatar">🤖</div>
+        <div class="message-avatar"><img src="robot.svg" alt="AI" class="avatar-icon"></div>
         <div class="message-content">
             <div class="typing-indicator">
                 <div class="typing-dot"></div>
@@ -164,7 +174,8 @@ async function sendMessage(message, fileData = null) {
                             if (!messageElements) {
                                 messageElements = addMessage('assistant', assistantMessage, data.message_id);
                             } else {
-                                messageElements.textDiv.textContent = assistantMessage;
+                                // 流式更新时使用Markdown渲染
+                                messageElements.textDiv.innerHTML = marked.parse(assistantMessage);
                             }
                             
                             // 保存会话ID
@@ -324,8 +335,17 @@ function deleteChatHistory(conversationId) {
     }
 }
 
+// 从侧边栏移除聊天历史（不弹确认框）
+function removeFromChatHistory(conversationId) {
+    const historyItem = elements.chatHistory.querySelector(`[data-conversation="${conversationId}"]`);
+    if (historyItem) {
+        historyItem.remove();
+        console.log('Removed conversation from sidebar:', conversationId);
+    }
+}
+
 // 加载聊天历史
-function loadChatHistory(conversationId) {
+async function loadChatHistory(conversationId) {
     // 移除其他激活状态
     elements.chatHistory.querySelectorAll('.history-item').forEach(item => {
         item.classList.remove('active');
@@ -339,10 +359,56 @@ function loadChatHistory(conversationId) {
     
     appState.conversationId = conversationId;
     
-    // 这里可以调用API加载历史消息
-    // 暂时清空消息列表
+    // 清空消息列表
     elements.messages.innerHTML = '';
     toggleWelcomeSection(false);
+    
+    try {
+        // 调用API加载历史消息
+        const response = await fetch(`/api/messages?conversation_id=${conversationId}&user=${appState.user}`);
+        if (response.ok) {
+            const data = await response.json();
+            
+            // 按时间顺序显示消息
+            if (data.data && data.data.length > 0) {
+                // 消息通常是倒序返回的，需要反转
+                const messages = data.data.reverse();
+                
+                messages.forEach(message => {
+                    // 添加用户消息
+                    if (message.query) {
+                        addMessage('user', message.query);
+                    }
+                    
+                    // 添加AI回复
+                    if (message.answer) {
+                        addMessage('assistant', message.answer, message.id);
+                    }
+                });
+                
+                // 滚动到底部
+                elements.chatContainer.scrollTop = elements.chatContainer.scrollHeight;
+            } else {
+                // 如果没有消息，显示欢迎界面
+                toggleWelcomeSection(true);
+            }
+        } else if (response.status === 404) {
+            // 对话不存在，可能已被删除，从侧边栏移除并显示欢迎界面
+            console.warn('Conversation not found, removing from sidebar');
+            removeFromChatHistory(conversationId);
+            // 清空当前对话ID，强制创建新对话
+            appState.conversationId = null;
+            toggleWelcomeSection(true);
+        } else {
+            console.error('Failed to load chat history:', response.status);
+            // 其他错误也显示欢迎界面
+            toggleWelcomeSection(true);
+        }
+    } catch (error) {
+        console.error('Error loading chat history:', error);
+        // 网络错误也显示欢迎界面
+        toggleWelcomeSection(true);
+    }
     
     console.log('Loading chat history for:', conversationId);
 }
@@ -469,7 +535,7 @@ function initializeEventListeners() {
 }
 
 // 初始化应用
-function initializeApp() {
+async function initializeApp() {
     initializeEventListeners();
     autoResizeTextarea();
     elements.messageInput.focus();
@@ -480,6 +546,52 @@ function initializeApp() {
             closeMobileSidebar();
         }
     });
+    
+    // 加载并同步对话列表
+    await loadAndSyncConversations();
+}
+
+// 加载并同步对话列表
+async function loadAndSyncConversations() {
+    try {
+        // 从服务器获取真实的对话列表
+        const response = await fetch(`/api/conversations?user=${appState.user}&limit=50`);
+        if (response.ok) {
+            const data = await response.json();
+            
+            // 清空当前侧边栏
+            elements.chatHistory.innerHTML = '';
+            
+            // 添加有效的对话到侧边栏
+            if (data.data && data.data.length > 0) {
+                data.data.forEach(conversation => {
+                    const title = conversation.name || '新对话';
+                    const time = formatDate(new Date(conversation.updated_at * 1000));
+                    addChatToHistory(conversation.id, title, time);
+                });
+                console.log(`Loaded ${data.data.length} conversations from server`);
+            }
+        } else {
+            console.warn('Failed to load conversations from server:', response.status);
+        }
+    } catch (error) {
+        console.error('Error loading conversations:', error);
+    }
+}
+
+// 格式化日期
+function formatDate(date) {
+    const now = new Date();
+    const diff = now - date;
+    const minutes = Math.floor(diff / (1000 * 60));
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    
+    if (minutes < 1) return '刚刚';
+    if (minutes < 60) return `${minutes}分钟前`;
+    if (hours < 24) return `${hours}小时前`;
+    if (days < 7) return `${days}天前`;
+    return date.toLocaleDateString();
 }
 
 // 启动应用

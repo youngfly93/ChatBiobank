@@ -499,17 +499,18 @@ body {
 /* 聊天模式下的主内容区域 */
 .main-content.chat-mode {
     justify-content: flex-start;
-    align-items: stretch;
+    align-items: center; /* 居中对齐 */
 }
 
 .main-content.chat-mode .chat-container {
     flex: 1;
     display: block;
+    margin: 0 auto; /* 水平居中 */
 }
 
 .main-content.chat-mode .input-section {
-    background-color: #ffffff;
-    border-top: 1px solid #e0e0e0;
+    background-color: transparent;
+    border-top: none;
     padding: 20px;
     margin-top: auto;
 }
@@ -588,6 +589,7 @@ body {
     display: none; /* 默认隐藏，有消息时显示 */
     width: 100%;
     max-width: 900px;
+    margin: 0 auto; /* 居中显示 */
 }
 
 .messages {
@@ -614,6 +616,12 @@ body {
     flex-shrink: 0;
 }
 
+.avatar-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
 .message.user .message-avatar {
     background-color: #e3f2fd;
 }
@@ -627,6 +635,96 @@ body {
 .message-content {
     flex: 1;
     line-height: 1.6;
+}
+
+/* Markdown 样式 */
+.message-text h1,
+.message-text h2,
+.message-text h3,
+.message-text h4,
+.message-text h5,
+.message-text h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.message-text h1 { font-size: 1.5em; }
+.message-text h2 { font-size: 1.3em; }
+.message-text h3 { font-size: 1.2em; }
+.message-text h4 { font-size: 1.1em; }
+
+.message-text p {
+    margin-bottom: 1em;
+}
+
+.message-text ul,
+.message-text ol {
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+}
+
+.message-text li {
+    margin-bottom: 0.3em;
+}
+
+.message-text code {
+    background-color: #f5f5f5;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+}
+
+.message-text pre {
+    background-color: #f5f5f5;
+    padding: 1em;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 1em;
+}
+
+.message-text pre code {
+    background: none;
+    padding: 0;
+}
+
+.message-text blockquote {
+    border-left: 4px solid #ddd;
+    margin: 1em 0;
+    padding-left: 1em;
+    color: #666;
+    font-style: italic;
+}
+
+.message-text strong,
+.message-text b {
+    font-weight: 600;
+}
+
+.message-text em,
+.message-text i {
+    font-style: italic;
+}
+
+.message-text table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.message-text th,
+.message-text td {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+}
+
+.message-text th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
 }
 
 .message-text {
@@ -661,21 +759,21 @@ body {
 
 .input-wrapper {
     position: relative;
-    background-color: #ffffff;
+    background-color: transparent;
     border: 2px solid #c7e9ff;
     border-radius: 32px;
     padding: 20px 24px;
     display: flex;
     align-items: flex-end;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(18, 135, 204, 0.08);
+    box-shadow: none;
     min-height: 64px;
 }
 
 .input-wrapper:focus-within {
     border-color: #61c3f7;
-    background-color: #ffffff;
-    box-shadow: 0 4px 16px rgba(18, 135, 204, 0.12);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(97, 195, 247, 0.1);
 }
 
 .message-input {

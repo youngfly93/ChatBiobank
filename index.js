@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 });
 
 // 所有其他路径也重定向到index.html (SPA支持)
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
