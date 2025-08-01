@@ -258,8 +258,13 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Something went wrong!' });
 });
 
-// 启动服务器
-app.listen(config.PORT, () => {
-    console.log(`Server is running on http://localhost:${config.PORT}`);
-    console.log(`API Key configured: ${config.DIFY_API_KEY ? 'Yes' : 'No'}`);
-});
+// 导出app供Vercel使用
+module.exports = app;
+
+// 只在非Vercel环境下启动服务器
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(config.PORT, () => {
+        console.log(`Server is running on http://localhost:${config.PORT}`);  
+        console.log(`API Key configured: ${config.DIFY_API_KEY ? 'Yes' : 'No'}`);
+    });
+}

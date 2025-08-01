@@ -2,14 +2,31 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
+      "src": "index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg))",
+      "dest": "/public/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "/index.js"
     }
-  ]
+  ],
+  "functions": {
+    "index.js": {
+      "maxDuration": 30
+    }
+  }
 }
