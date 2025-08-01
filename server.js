@@ -242,6 +242,16 @@ app.post('/api/chat-messages/:taskId/stop', async (req, res) => {
     }
 });
 
+// 根路径路由 - 服务index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// 所有其他路径也重定向到index.html (SPA支持)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // 错误处理中间件
 app.use((err, req, res, next) => {
     console.error(err.stack);
