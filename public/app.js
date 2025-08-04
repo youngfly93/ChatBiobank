@@ -2,7 +2,7 @@
 const appState = {
     conversationId: null,
     messages: [],
-    currentUser: 'user-' + Date.now()
+    user: 'user-' + Date.now()
 };
 
 // DOM 元素
@@ -120,7 +120,7 @@ async function sendMessage(message, fileData = null) {
         // 准备请求数据
         const requestData = {
             query: message,
-            user: appState.currentUser,
+            user: appState.user,
             conversation_id: appState.conversationId,
             response_mode: 'streaming'
         };
@@ -218,7 +218,7 @@ async function handleFileUpload(file) {
     try {
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('user', appState.currentUser);
+        formData.append('user', appState.user);
         
         const response = await fetch('/api/files/upload', {
             method: 'POST',
