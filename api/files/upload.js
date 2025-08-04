@@ -1,4 +1,3 @@
-import axios from 'axios';
 import config from '../../config.js';
 
 export default async function handler(req, res) {

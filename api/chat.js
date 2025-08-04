@@ -1,4 +1,3 @@
-import axios from 'axios';
 import config from '../config.js';
 
 export default async function handler(req, res) {
@@ -28,13 +27,18 @@ export default async function handler(req, res) {
         console.log('Sending request to Dify API:', config.DIFY_API_BASE_URL);
         console.log('Request data:', JSON.stringify(requestData, null, 2));
 
-        const response = await axios.post(`${config.DIFY_API_BASE_URL}/chat-messages`, requestData, {
+        const response = await fetch(`${config.DIFY_API_BASE_URL}/chat-messages`, {
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${config.DIFY_API_KEY}`,
                 'Content-Type': 'application/json'
             },
-            responseType: 'stream'
+            body: JSON.stringify(requestData)
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         // 设置SSE响应头
         res.setHeader('Content-Type', 'text/event-stream');
@@ -44,24 +48,27 @@ export default async function handler(req, res) {
         res.setHeader('Access-Control-Allow-Headers', 'Cache-Control');
 
         // 转发流式响应
-        response.data.on('data', (chunk) => {
-            res.write(chunk);
-        });
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
 
-        response.data.on('end', () => {
+        try {
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                
+                const chunk = decoder.decode(value, { stream: true });
+                res.write(chunk);
+            }
+        } finally {
+            reader.releaseLock();
             res.end();
-        });
-
-        response.data.on('error', (error) => {
-            console.error('Stream error:', error);
-            res.status(500).json({ error: 'Stream error' });
-        });
+        }
 
     } catch (error) {
-        console.error('Error in chat API:', error.response?.data || error.message);
+        console.error('Error in chat API:', error.message);
         res.status(500).json({ 
             error: 'Internal server error',
-            message: error.response?.data?.message || error.message 
+            message: error.message 
         });
     }
 }

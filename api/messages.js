@@ -1,4 +1,3 @@
-import axios from 'axios';
 import config from '../config.js';
 
 export default async function handler(req, res) {
@@ -9,17 +8,24 @@ export default async function handler(req, res) {
     try {
         const { conversation_id, user, first_id, limit = 20 } = req.query;
         
-        const response = await axios.get(
-            `${config.DIFY_API_BASE_URL}/messages`,
-            {
-                params: { conversation_id, user, first_id, limit },
-                headers: {
-                    'Authorization': `Bearer ${config.DIFY_API_KEY}`
-                }
-            }
-        );
+        const url = new URL(`${config.DIFY_API_BASE_URL}/messages`);
+        if (conversation_id) url.searchParams.append('conversation_id', conversation_id);
+        if (user) url.searchParams.append('user', user);
+        if (first_id) url.searchParams.append('first_id', first_id);
+        url.searchParams.append('limit', limit);
         
-        res.json(response.data);
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `Bearer ${config.DIFY_API_KEY}`
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        res.json(data);
         
     } catch (error) {
         console.error('Messages API error:', error.response?.data || error.message);
