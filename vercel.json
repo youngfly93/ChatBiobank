@@ -5,6 +5,15 @@
     },
     "api/files/upload.js": {
       "maxDuration": 10
+    },
+    "api/conversations.js": {
+      "maxDuration": 10
+    },
+    "api/messages.js": {
+      "maxDuration": 10
+    },
+    "api/chat-messages/[taskId]/stop.js": {
+      "maxDuration": 10
     }
   }
 }
