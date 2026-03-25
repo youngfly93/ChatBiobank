@@ -463,31 +463,6 @@ body {
     }
 }
 
-/* Title shimmer */
-.shiny-text {
-    background: linear-gradient(
-        110deg,
-        var(--ink) 40%,
-        var(--accent-light) 50%,
-        var(--ink) 60%
-    );
-    background-size: 250% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-    display: inline-block;
-    animation: shine 5s ease-in-out infinite;
-}
-
-@keyframes shine {
-    0% { background-position: 250% 0; }
-    100% { background-position: -250% 0; }
-}
-
-.shiny-text.disabled {
-    animation: none;
-}
 
 /* ===== Chat Container ===== */
 .chat-container {
