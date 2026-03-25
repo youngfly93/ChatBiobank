@@ -4,75 +4,58 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-### Starting the Application
-- **Development mode**: `npm run dev` (uses nodemon for auto-reload)
-- **Production mode**: `npm start` (starts server.js directly)
-- **Install dependencies**: `npm install`
+```bash
+npm install          # Install dependencies
+npm run dev          # Development mode (nodemon auto-reload)
+npm start            # Production mode (node server.js)
+```
 
-### Environment Configuration
-- Configure API key in `config.js` or set `DIFY_API_KEY` environment variable
-- Server runs on port 3000 by default (configurable via `PORT` env var)
+No test framework or linter is configured.
 
-## Architecture Overview
+## Environment Configuration
 
-This is a Node.js/Express AI chat application that proxies requests to the Dify API with a Claude-style UI.
+Copy `.env.example` to `.env` and fill in values. `dotenv` is loaded in `server.js` before config is read. For Vercel, set env vars via the Vercel dashboard.
 
-### Key Components
+- `DIFY_API_KEY` — Required for Dify API
+- `DIFY_API_BASE_URL` — Defaults to `https://api.dify.ai/v1`
+- `PORT` — Server port (default: 3000)
 
-**Backend Architecture:**
-- `server.js` - Main Express server with all API routes (monolithic structure)
-- `api/` directory - Contains Vercel serverless function versions of endpoints
-- `config.js` - Centralized configuration with environment variable support
+## Architecture
 
-**API Endpoints Structure:**
-- `/api/chat` - Streaming chat messages via Server-Sent Events (SSE)
-- `/api/files/upload` - File upload with 10MB limit (images only)
-- `/api/conversations` - CRUD operations for conversation management
-- `/api/messages` - Message history retrieval
-- `/api/chat-messages/:taskId/stop` - Stop ongoing chat responses
+Node.js/Express chat application that proxies requests to the Dify API with a Claude-style UI. The entire frontend is vanilla JS (no framework, no build step).
 
-**Frontend:**
-- `public/` - Static files served by Express
-- `public/app.js` - Vanilla JavaScript client with state management
-- `public/index.html` - Single-page application
-- `public/styles.css` - Claude-style UI styling
+### Dual Deployment: Traditional vs Vercel
 
-### Dual Deployment Architecture
+**Traditional** (`server.js`): Monolithic Express server using CommonJS (`require`) and `axios` for HTTP requests to Dify. Serves static files from `public/`.
 
-The project supports both traditional Node.js hosting and Vercel serverless deployment:
+**Vercel** (`api/` directory): Separate serverless function handlers using ES modules (`import`) and native `fetch`. Each endpoint is its own file mirroring the Vercel file-based routing convention (`api/chat-messages/[taskId]/stop.js` for dynamic routes).
 
-- **Traditional**: Uses `server.js` as monolithic Express server
-- **Vercel**: Uses separate API route handlers in `api/` directory
-- Vercel configuration in `vercel.json` sets function timeouts
+`config.js` uses both `export default` and `module.exports` to support both module systems.
 
-### Key Technical Details
+`index.js` is a minimal Express SPA router used as Vercel's entry point for non-API routes.
 
-**Streaming Implementation:**
-- Uses Server-Sent Events (SSE) for real-time chat streaming
-- Proxies streaming responses from Dify API directly to client
-- Error handling includes stream error recovery
+### API Endpoints
 
-**File Upload System:**
-- Server.js uses multer with memory storage for traditional deployment
-- Vercel version has simplified mock implementation (production would need external storage)
-- Supports png, jpg, jpeg, webp, gif formats
+| Endpoint | Method | Purpose |
+|---|---|---|
+| `/api/chat` | POST | Streaming chat via SSE (proxies Dify `/chat-messages`) |
+| `/api/files/upload` | POST | Image upload (10MB limit; png/jpg/jpeg/webp/gif) |
+| `/api/conversations` | GET | List conversations |
+| `/api/conversations/:id` | DELETE | Delete conversation |
+| `/api/messages` | GET | Message history for a conversation |
+| `/api/chat-messages/:taskId/stop` | POST | Stop an ongoing response |
 
-**State Management:**
-- Frontend uses simple object-based state management
-- Conversation history stored client-side
-- User identification via timestamp-based IDs
+### Frontend (`public/`)
 
-### Configuration Management
+- `app.js` — All client logic: state management (`appState` object), SSE stream parsing, conversation sidebar, file upload, mobile responsive sidebar toggle
+- `index.html` — SPA shell, loads `marked` from CDN for Markdown rendering
+- `styles.css` — Claude-style UI
 
-Environment variables are read with fallbacks:
-- `DIFY_API_KEY` - Required for Dify API integration
-- `DIFY_API_BASE_URL` - Defaults to https://api.dify.ai/v1
-- `PORT` - Server port (default: 3000)
-- `NODE_ENV` - Controls server startup behavior
+State is client-side only. User ID is `'user-' + Date.now()` generated on page load — no persistence across sessions.
 
-### Important Notes
+### Key Patterns
 
-- No test framework currently implemented
-- Chinese language comments and documentation throughout
-- File upload functionality differs between server.js and Vercel implementations
-- SPA routing handled via catch-all route serving index.html
+- **SSE streaming**: Backend pipes Dify's streaming response directly to the client. Frontend reads with `ReadableStream` API, parses `data:` lines, and incrementally renders Markdown via `marked.parse()`.
+- **Conversation lifecycle**: First message creates a conversation (Dify assigns `conversation_id`). Sidebar history is populated on load via `/api/conversations` and synced from server.
+- **File upload divergence**: `server.js` uses `multer` + `form-data` to proxy uploads to Dify. The Vercel `api/files/upload.js` has a simplified mock — production Vercel deployment would need external storage.
+

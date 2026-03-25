@@ -102,3 +102,6 @@ Thumbs.db
 # Logs
 logs
 *.log
+
+# Local Playwright runtime libraries
+.playwright-runtime/

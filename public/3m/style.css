@@ -736,7 +736,7 @@ footer {
     margin-top: var(--space-3);
 }
 
-/* Ask BioMentor floating link */
+/* Ask ChatBiobank floating link */
 .ask-biomenthor {
     position: fixed;
     bottom: 24px;

@@ -88,6 +88,18 @@ npm install -g nodemon
 npm run dev
 ```
 
+## Playwright 环境
+
+如果本机运行 Playwright 时出现 `libasound.so.2` 缺失，可以在项目根目录执行：
+```bash
+scripts/setup_playwright_runtime.sh
+```
+
+之后用包装脚本运行需要启动 Chromium 的命令：
+```bash
+scripts/with_playwright_env.sh python3 your_playwright_script.py
+```
+
 ## License
 
 MIT
