@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- 移动端顶部栏（独立于 sidebar，始终可见） -->
+        <!-- 移动端顶部栏 -->
         <div class="mobile-header">
             <span class="mobile-brand">BioMentor 3M</span>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -21,66 +21,77 @@
             </button>
         </div>
 
-        <!-- 侧边栏 -->
+        <!-- 侧边栏：研究助手导航 -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-body">
 
-                <!-- 顶部区域 -->
-                <div class="sidebar-top">
-                    <!-- Logo区域 -->
+                <!-- 品牌区 -->
+                <div class="sidebar-brand">
                     <div class="sidebar-logo" id="sidebarLogo">
                         <div class="logo-icon">
                             <div class="logo-shape"></div>
                         </div>
-                        <span class="logo-text">yanglab</span>
-                    </div>
-
-                    <!-- 导航链接 -->
-                    <div class="sidebar-nav">
-                        <a href="#" class="sidebar-link active" id="newChatBtn">
-                            <div class="link-icon">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                            <span class="link-text">New Chat</span>
-                        </a>
-
-                        <a href="#" class="sidebar-link">
-                            <div class="link-icon">
-                                <i class="fas fa-clock-rotate-left"></i>
-                            </div>
-                            <span class="link-text">History</span>
-                        </a>
-                    </div>
-
-                    <!-- 聊天历史区域 -->
-                    <div class="chat-history-section">
-                        <div class="section-divider"></div>
-                        <div class="chat-history" id="chatHistory">
-                            <!-- 历史记录将动态添加到这里 -->
+                        <div class="brand-text">
+                            <span class="brand-name">BioMentor 3M</span>
+                            <span class="brand-sub">Framework Assistant</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- 底部区域 -->
-                <div class="sidebar-bottom">
-                    <a href="3m/" class="framework-link" target="_blank">
-                        <div class="link-icon">
-                            <i class="fas fa-arrow-up-right-from-square"></i>
-                        </div>
-                        <span class="link-text">Explore 3M Framework</span>
-                    </a>
-                    <div class="section-divider"></div>
-                    <div class="sidebar-link user-profile" id="userProfile">
-                        <div class="link-icon">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face&auto=format"
-                                 alt="User" class="user-avatar">
-                        </div>
-                        <span class="link-text">Researcher</span>
+                <!-- 新建对话按钮 -->
+                <button class="new-chat-btn" id="newChatBtn">
+                    <i class="fas fa-plus"></i>
+                    <span>New Chat</span>
+                </button>
+
+                <!-- 对话历史 -->
+                <div class="sidebar-section">
+                    <div class="section-label">Recent Chats</div>
+                    <div class="chat-history" id="chatHistory">
+                        <div class="history-empty">No conversations yet</div>
                     </div>
+                </div>
+
+                <!-- 3M Framework 栏目导航 -->
+                <div class="sidebar-section">
+                    <div class="section-label">3M Framework</div>
+                    <nav class="framework-nav">
+                        <a href="3m/introduction.html" class="nav-item" target="_blank">
+                            <span>Introduction</span>
+                        </a>
+                        <a href="3m/omics.html" class="nav-item" target="_blank">
+                            <span>Omics Requirements</span>
+                        </a>
+                        <a href="3m/sample_management.html" class="nav-item" target="_blank">
+                            <span>Sample Management</span>
+                        </a>
+                        <a href="3m/ethics.html" class="nav-item" target="_blank">
+                            <span>Ethics & Security</span>
+                        </a>
+                        <a href="3m/workflow.html" class="nav-item" target="_blank">
+                            <span>Biobank Workflow</span>
+                        </a>
+                        <a href="3m/discussion.html" class="nav-item" target="_blank">
+                            <span>Discussion</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- 底部 -->
+                <div class="sidebar-footer">
+                    <div class="sidebar-divider"></div>
+                    <a href="3m/" class="footer-link" target="_blank">
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+                        <span>Framework Site</span>
+                    </a>
+                    <a href="3m/authors.html" class="footer-link" target="_blank">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- 移动端侧边栏遮罩 -->
+            <!-- 移动端遮罩 -->
             <div class="mobile-overlay" id="mobileOverlay"></div>
         </aside>
 
@@ -100,7 +111,6 @@
             <!-- 聊天消息区域 -->
             <div class="chat-container" id="chatContainer">
                 <div class="messages" id="messages">
-                    <!-- 消息将动态添加到这里 -->
                 </div>
             </div>
 
@@ -127,7 +137,6 @@
                         </div>
                     </form>
 
-                    <!-- 功能按钮：与 3M Framework 栏目名对齐 -->
                     <div class="feature-buttons">
                         <button class="feature-btn">
                             <i class="fas fa-dna"></i>

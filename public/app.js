@@ -302,6 +302,10 @@ function addChatToHistory(conversationId, title, time = '刚刚') {
         item.classList.remove('active');
     });
     
+    // 移除空状态提示
+    const emptyHint = elements.chatHistory.querySelector('.history-empty');
+    if (emptyHint) emptyHint.remove();
+
     // 添加到历史列表顶部
     elements.chatHistory.insertBefore(historyItem, elements.chatHistory.firstChild);
     historyItem.classList.add('active');
