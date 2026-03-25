@@ -134,7 +134,7 @@ nav ul li a:hover {
 
 nav ul li a.active {
     color: #ffffff;
-    background-color: rgba(255,255,255,0.15);
+    background-color: var(--accent);
     font-weight: 500;
 }
 
