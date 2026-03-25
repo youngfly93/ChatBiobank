@@ -4,106 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A 3M Framework for Multi-omics Biobank Development</title>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="header-content">
-            <h1>A 3M Framework for Multi-omics Biobank Development</h1>
+            <nav>
+                <ul>
+                    <li><a href="introduction.html">Introduction</a></li>
+                    <li><a href="omics.html">Omics Requirements</a></li>
+                    <li><a href="sample_management.html">Sample Management</a></li>
+                    <li><a href="ethics.html">Ethics & Security</a></li>
+                    <li><a href="workflow.html">Biobank Workflow</a></li>
+                    <li><a href="discussion.html">Discussion</a></li>
+                    <li><a href="authors.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main>
-        <section class="intro-panel">
-            <div class="intro-text">
-                <h2><i class="fas fa-flask"></i> Welcome to the 3M Framework</h2>
-                <p>This framework aims to provide a standardized multimodal biospecimen management system, supporting multi-omics research and precision medicine. Please select a section below to view detailed content.</p>
-            </div>
+    <main class="homepage">
+        <section class="hero">
+            <h1>A 3M Framework for Multi-omics Biobank Development</h1>
+            <p class="subtitle">A standardized framework for <strong>M</strong>ulti-omics, <strong>M</strong>ultimodal biospecimen, and <strong>M</strong>ulti-department biobank management</p>
+            <p class="affiliation">Department of Gastrointestinal Surgery, The First Affiliated Hospital of Zhengzhou University</p>
         </section>
 
-        <section class="panel-grid">
-            <a href="introduction.html" class="panel-card">
-                <div class="panel-icon">
-                    <i class="fas fa-book-open"></i>
-                </div>
-                <div class="panel-info">
-                    <h3>Introduction</h3>
-                    <p>Background, objectives, and key scientific concepts of the project.</p>
-                </div>
-            </a>
+        <hr class="divider">
 
-            <a href="omics.html" class="panel-card">
-                <div class="panel-icon">
-                    <i class="fas fa-dna"></i>
-                </div>
-                <div class="panel-info">
-                    <h3>Omics Requirements</h3>
-                    <p>Requirements and standards for biospecimens across different omics technologies.</p>
-                </div>
-            </a>
-
-            <a href="sample_management.html" class="panel-card">
-                <div class="panel-icon">
-                    <i class="fas fa-vials"></i>
-                </div>
-                <div class="panel-info">
-                    <h3>Sample Management</h3>
-                    <p>Standard procedures for biospecimen collection, processing, and storage.</p>
-                </div>
-            </a>
-
-            <a href="ethics.html" class="panel-card">
-                <div class="panel-icon">
-                    <i class="fas fa-file-contract"></i>
-                </div>
-                <div class="panel-info">
-                    <h3>Ethics & Security</h3>
-                    <p>Ethical compliance and data security management for biobanks.</p>
-                </div>
-            </a>
-
-            <a href="workflow.html" class="panel-card">
-                <div class="panel-icon">
-                    <i class="fas fa-project-diagram"></i>
-                </div>
-                <div class="panel-info">
-                    <h3>Biobank Workflow</h3>
-                    <p>Complete biobank workflow and best practices.</p>
-                </div>
-            </a>
-
-            <a href="authors.html" class="panel-card">
-                <div class="panel-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="panel-info">
-                    <h3>Contact Us</h3>
-                    <!-- <p>Project contributors and contact details.</p> -->
-                </div>
-            </a>
+        <section class="toc">
+            <h2>Contents</h2>
+            <ol class="toc-list">
+                <li>
+                    <a href="introduction.html">
+                        <span class="toc-title">Introduction</span>
+                        <span class="toc-desc">Background, objectives, and key scientific concepts of the project</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="omics.html">
+                        <span class="toc-title">Omics Requirements</span>
+                        <span class="toc-desc">Biospecimen specifications for genomics, transcriptomics, proteomics, metabolomics, and epigenomics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="sample_management.html">
+                        <span class="toc-title">Sample Management</span>
+                        <span class="toc-desc">Collection, processing, storage, transport, and quality control procedures</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ethics.html">
+                        <span class="toc-title">Ethics & Security</span>
+                        <span class="toc-desc">Informed consent, privacy protection, and ethical compliance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="workflow.html">
+                        <span class="toc-title">Biobank Workflow</span>
+                        <span class="toc-desc">Sample accession, release, and metadata management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="discussion.html">
+                        <span class="toc-title">Discussion & Prospects</span>
+                        <span class="toc-desc">Clinical integration, automation, and future directions</span>
+                    </a>
+                </li>
+            </ol>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 A framework for Multi-Omics based Biobank | <i class="fas fa-envelope"></i> Contact Us: fuyang@zzu.edu.cn</p>
+        <div class="footer-content">
+            <div class="footer-main">
+                <p class="footer-title">3M Framework for Multi-omics Biobank Development</p>
+                <p class="footer-institution">Department of Gastrointestinal Surgery, The First Affiliated Hospital of Zhengzhou University, Zhengzhou 450052, China</p>
+            </div>
+            <div class="footer-meta">
+                <p>Corresponding authors: Yang Fu (<a href="mailto:fuyang@zzu.edu.cn">fuyang@zzu.edu.cn</a>) &middot; Zhen Yang (<a href="mailto:13526685689@163.com">13526685689@163.com</a>)</p>
+                <p>&copy; 2024 Yang Lab. All sample collection approved by the Ethics Committee of The First Affiliated Hospital of Zhengzhou University.</p>
+                <p class="footer-update">Last updated: 2025</p>
+            </div>
+        </div>
     </footer>
-    
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add staggered animation to panel cards
-            const cards = document.querySelectorAll('.panel-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${0.1 * index}s`;
-            });
-        });
-    </script>
 </body>
-</html> 
+</html>

@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom styles -->
@@ -16,127 +16,149 @@
 <body>
     <header>
         <div class="header-content">
-            <h1>A 3M Framework for Multi-omics Biobank Development</h1>
+            <a href="index.html" class="site-name">3M Framework</a>
+            <nav>
+                <ul>
+                    <li><a href="introduction.html">Introduction</a></li>
+                    <li><a href="omics.html">Omics Requirements</a></li>
+                    <li><a href="sample_management.html" class="active">Sample Management</a></li>
+                    <li><a href="ethics.html">Ethics &amp; Security</a></li>
+                    <li><a href="workflow.html">Biobank Workflow</a></li>
+                    <li><a href="discussion.html">Discussion</a></li>
+                    <li><a href="authors.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="introduction.html"><i class="fas fa-book-open"></i> Introduction</a></li>
-                <li><a href="omics.html"><i class="fas fa-dna"></i> Omics Requirements</a></li>
-                <li><a href="sample_management.html" class="active"><i class="fas fa-vials"></i> Sample Management</a></li>
-                <li><a href="ethics.html"><i class="fas fa-file-contract"></i> Ethics & Security</a></li>
-                <li><a href="workflow.html"><i class="fas fa-project-diagram"></i> Biobank Workflow</a></li>
-                <li><a href="authors.html"><i class="fas fa-users"></i> Contact Us</a></li>
-            </ul>
-        </nav>
     </header>
 
+    <div class="page-layout">
     <main>
         <div class="page-header">
-            <h2><i class="fas fa-vials"></i> Sample Management</h2>
+            <h2>Sample Management</h2>
             <div class="breadcrumb">
-                <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> Sample Management
+                <a href="index.html">Home</a> / Sample Management
             </div>
         </div>
 
-        <section id="quality-management" class="card content-section">
-            <h3><i class="fas fa-tasks"></i> Quality management of biobank</h3>
+        <section id="quality-management" class="content-section">
+            <h3>Quality management of biobank</h3>
 
             <div class="sub-section" id="multimodal-biospecimen-collection-and-storage">
-                <h4 id="multimodal-biospecimen-collection-and-storage-heading"><i class="fas fa-microscope"></i> Multimodal biospecimen collection and storage</h4>
+                <h4 id="multimodal-biospecimen-collection-and-storage-heading">Multimodal biospecimen collection and storage</h4>
                 <p>The pre-processing of biological samples is a key component in the construction of high-quality biospecimen repositories, and its standardized implementation faces a number of challenges. The first problem is that potential bias in sample collection may lead to systematic errors, especially when multimodal samples are collected from the same patient, which may aggravate the physical and mental burden of the patient and lead to a decrease in the sample acquisition rate. In addition, the time-dependent degradation of endogenous biomolecules in isolated samples severely restricts the reliability of downstream analyses, and it requires some quality control methods to ensure the sample quality. To this end, this study constructs a clinical diagnosis and treatment-sample bank synergistic framework to break through the bottleneck of quality control through systematic strategies.</p>
                 <p>The standardised procedure based on the clinical pathway is as follows: after diagnosis and admission to the hospital, patients should sign the standardised 'Informed Consent for Biological Sample Donation' voluntarily on the premise of being fully informed. The sample collection time window must strictly follow the diagnosis and treatment sequence. In the First Affiliated Hospital of Zhengzhou University, for example, after the patient is diagnosed and before any therapeutic interventions are carried out, the hospital will collect the first biological sample to be sent to the Laboratory Department for testing, and the biospecimen bank can collect the samples required by the bank synchronously, which effectively avoids the trouble caused by the second collection to the patient. Throughout the treatment cycle, the biospecimen repository needs to work closely with the clinical collection to collect dynamic samples, covering the entire spectrum of biospecimens from the initial diagnosis to the end of treatment. The collection of various types of samples needs to be prepared and pre-treated according to the type of downstream experiments. After obtaining clinical samples, it is recommended that the samples be de-identified and labelled in order to protect patients' personal information. In addition, it is recommended to collect 2-3 additional samples for distribution according to the sample volume requirements of the above-mentioned groups. Regarding sample transport, it needs to be carried out under temperature monitoring according to environmental conditions and experimental requirements. In addition, all biological samples need to undergo quality testing, including tissue sample quality, DNA quality, RNA quality and protein quality, before depositing into the biosample bank. This well-thought-out sample management programme provides a reliable guarantee for the research and maximizes the effective use of the samples.</p>
             </div>
 
             <div class="sub-section sample-type" id="tissue">
-                <h5 id="tissue-heading"><i class="fas fa-cut"></i> Tissue</h5>
+                <h5 id="tissue-heading">Tissue</h5>
                 <p>To minimize tissue warm ischemia time, tissue samples should be collected and processed within 30 minutes of gross specimen excision. Processing involves rinsing the excised tissue samples with sterile, nuclease-free saline or PBS to remove surface blood. The tissue should then be dissected into smaller pieces and aliquoted for storage to minimize freeze-thaw cycles. It is important to note that these tissue samples may be derived from "residual tissue" from surgical specimens, or from biopsies obtained via minor surgery, endoscopy, or ultrasound guidance. The order of collection should be as follows: normal tissue (N: >5 cm from the tumor margin), adjacent tissue (P: 2-3 cm from the tumor margin), and tumor tissue (T).</p>
                 <p>For fresh frozen samples, provide an adequate amount of tissue while ensuring sufficient material for pathological examination. Processed tissue samples should be stored in 2 mL RNase-free screw-cap cryovials, rapidly frozen in liquid nitrogen for 0.5 h, and then transferred to -80°C or liquid nitrogen for long-term storage. If immediate processing is not possible, flash-freezing should be performed within approximately 3 hours of storage at 4°C. Certain omics applications require the use of preservation solutions. For example, when using RNAlater, add a volume five times that of the tissue, store at 4°C overnight, and then transfer to -80°C for applications such as transcriptomic sequencing. For preservation with Miltenyi tissue storage solution, add a volume five times that of the tissue and transport to the laboratory within 24 hours at 4°C for applications such as single-cell sequencing. For paraffin-embedded samples, fixation in 10% buffered formalin (preferably neutral buffered formalin) should occur within approximately 3 hours of surgical resection. The fixation time is typically 24-48 hours. Embedded tissues can be stored at room temperature or 4°C.</p>
             </div>
 
             <div class="sub-section sample-type" id="blood">
-                <h5 id="blood-heading"><i class="fas fa-tint"></i> Blood</h5>
+                <h5 id="blood-heading">Blood</h5>
                 <p>Blood samples should be processed within 2 hours whenever possible. If immediate processing is not feasible, samples should be stored at 4°C for less than 24 hours. For serum or plasma, processing (centrifugation, separation, aliquoting, and freezing) must occur within 4 hours of collection. It is recommended to store processed blood samples in multiple aliquots to avoid quality degradation due to repeated freeze-thaw cycles. After collection, anticoagulant blood should be gently inverted to mix, centrifuged at 2000g for 10 minutes, and the plasma aliquoted into cryovials, flash-frozen in liquid nitrogen for 0.5 hours, and stored at -80°C. After collection of procoagulant blood, allow it to clot at room temperature (15-25°C) for 0.5 hours, centrifuge at 2000g for 10 minutes, and collect the supernatant (serum). Aliquot the serum into cryovials, flash-freeze in liquid nitrogen for 0.5 hours, and store at -80°C long-term. Discard the final 500 μl to avoid platelet and cellular contamination. Hemolysis, the presence of insoluble flocculent material, or turbidity in the blood sample are considered non-compliant, and re-sampling is recommended.</p>
                 <p>The choice of blood collection tube type should be based on the experimental objectives, downstream analysis requirements, and sample stability. In metabolomics, serum is considered the gold standard due to the absence of anticoagulant interference, particularly for amino acid metabolite detection. Heparin/EDTA plasma tubes can be used as alternatives, but it is important to note that heparin interferes with DNA studies and EDTA affects NMR signals. Proteomics studies require special consideration: serum can reflect changes in coagulation-related proteins, while EDTA plasma can inhibit protease activity, which is beneficial for the stability of sensitive proteins such as phosphatases. Although citrate tubes reduce platelet activation, the dilution effect caused by the liquid anticoagulant may affect the accuracy of protein concentrations. For transcriptomics, PAXgene tubes (for rapid RNA stabilization) or EDTA tubes (to inhibit RNase release) are preferred; the latter is more suitable for large-scale clinical studies but requires controlled sample exposure time.</p>
             </div>
 
             <div class="sub-section sample-type" id="urine">
-                <h5 id="urine-heading"><i class="fas fa-flask"></i> Urine</h5>
+                <h5 id="urine-heading">Urine</h5>
                 <p>Prior to urine sample collection, donors should be instructed to thoroughly cleanse or disinfect the urethral opening. Following collection, a visual inspection of the urine sample should be performed to assess its suitability, specifically checking for contaminants such as fecal matter. Midstream urine samples should be collected from each donor in the morning before breakfast (5:00-8:00 AM). Samples should be centrifuged at 3000 rpm at 4°C for 10 minutes, snap-frozen in liquid nitrogen for 0.5 hours, and then stored at -80°C. Samples that cannot be processed in a timely manner should also be placed in 4 ℃ <48h, at room temperature (22 ℃ or so) <3h, to avoid ice packs and room temperature transport more than 8h, -20 ℃ <2 weeks, the number of freezing and thawing ≤ 3 times.</p>
             </div>
 
             <div class="sub-section sample-type" id="saliva">
-                <h5 id="saliva-heading"><i class="fas fa-smile"></i> Saliva</h5>
+                <h5 id="saliva-heading">Saliva</h5>
                 <p>Saliva samples should be collected between 9:00 AM and 12:00 PM. Donors should rinse their mouths with purified water 2 hours before sampling to remove oral debris. Following this, donors should refrain from eating, drinking, smoking, or brushing their teeth. A sterile cotton swab should be placed under the donor's tongue, and the saliva-soaked swab should be removed every 1 minute, repeated four times. Subsequently, the saliva should be extracted from the cotton swab using a disposable syringe. The samples should then be centrifuged at 4°C at 2600g for 15 minutes to remove any debris. The supernatant from each sample should be aliquoted into cryovials, snap-frozen in liquid nitrogen for 0.5 hours, and stored at -80°C until use. Samples should be frozen as soon as possible after sampling, and if freezing conditions cannot be met, they should be <1h at room temperature, <6h at 2-8°C, and ≤4 weeks at -20°C.</p>
             </div>
 
             <div class="sub-section sample-type" id="faeces">
-                <h5 id="faeces-heading"><i class="fas fa-poop"></i> Faeces</h5>
+                <h5 id="faeces-heading">Faeces</h5>
                 <p>Feces were collected within 24 hours prior to endoscopy. Fresh specimens are essential. Before collection, participants were instructed to void their bladders and, whenever possible, to use a squat toilet. Fecal matter was collected into a clean, dry fecal collection tube and transferred to a sterile container within 30 minutes. Using a sterile spatula, the middle portion of the fecal sample was collected. Following collection, samples were aliquoted and stored at 4°C. The collected samples were snap-frozen in liquid nitrogen for 0.5 hours and then stored at -80°C. Fecal samples should be stored temporarily at -20°C or 4°C for <8 weeks or <12h, respectively, and at room temperature for <4h.</p>
             </div>
         </section>
 
-        <section id="aliquoting" class="card content-section">
-            <h3><i class="fas fa-clone"></i> Sample Aliquoting</h3>
+        <section id="aliquoting" class="content-section">
+            <h3>Sample Aliquoting</h3>
             <p>The collection and processing of multi-omics samples should strictly adhere to established sample volume guidelines. To ensure the smooth progression of the research, we recommend collecting an additional 2-3 aliquots of each sample as backups and storing them using an aliquotting strategy. This backup strategy effectively addresses potential unforeseen circumstances during sample storage, transportation, or usage, such as sample degradation due to temperature fluctuations or leakage caused by improper handling. In the event of such incidents, the intact backup samples can be promptly utilized to prevent delays in research progress caused by a single problematic sample, thereby ensuring the seamless execution of the entire research endeavor. This robust sample management protocol provides a reliable safeguard for the research, minimizing experimental risks.</p>
         </section>
 
-        <section id="transport" class="card content-section">
-            <h3><i class="fas fa-truck"></i> Sample transport</h3>
+        <section id="transport" class="content-section">
+            <h3>Sample transport</h3>
             <p>Refrigerated samples (i.e., samples stored at 2-8°C) require the use of biological ice packs to maintain their storage temperature range during transport. For samples that require cryopreservation, dry ice or liquid nitrogen must be used for protected transport. It is recommended to store the samples at 2-8°C before centrifugation and dispensing, and no freezing is allowed. When using dry ice for transport, the amount of dry ice should be reasonably arranged according to the length of the transport: 2 kg of dry ice can maintain the low-temperature environment for ≤6 h, 5 kg of dry ice can maintain ≤24 h, and 8 kg of dry ice can maintain ≤48 h,taking into account that the temperature is high in the summer, the amount of dry ice should be increased to 1.5 times of the original. In order to prevent the dry ice from crushing and damaging the samples, it is recommended to use powdered, rod-shaped dry ice, and brick-shaped dry ice can be smashed with a hammer for transport. In addition, to ensure the safety of the samples, all samples placed in dry ice should be placed in self-sealing bags on the outer packaging and clearly labelled for easy identification and tracking. It should be emphasised that, to ensure the safety and integrity of the samples, it is strictly prohibited to transport samples loose inside the dry ice.</p>
         </section>
 
-        <section id="qc" class="card content-section">
-            <h3><i class="fas fa-check-square"></i> Quality Control - QC</h3>
+        <section id="qc" class="content-section">
+            <h3>Quality Control - QC</h3>
             <div class="sub-section" id="sample-sampling">
-                <h4 id="sample-sampling-heading"><i class="fas fa-clipboard-list"></i> Sample sampling</h4>
+                <h4 id="sample-sampling-heading">Sample sampling</h4>
                 <p>To ensure the reliability of sample quality, it is recommended that strict quality control measures be implemented throughout the entire process of sample collection to use. It is recommended to establish a QC system based on risk analysis with reference to ISO 20387. Regular quality sampling of samples should be carried out, with small batch sampling (accounting for 2%-5% of the total volume of the sample bank) on a monthly basis and comprehensive sampling (accounting for 10%-15%) every six months; when the sample bank undergoes a major environmental change, introduces a new method or has abnormal results, targeted sampling will be carried out in a timely manner; and the scope of the test covers the quality of proteins, nucleic acids and tissue samples. For samples that fail to meet the standards, they should be destroyed according to ISO 35001, and destruction records should be completed. Through regular sampling and standardised management, the integrity of the samples and the reliability of the research data can be effectively guaranteed to ensure the smooth implementation of scientific research.</p>
             </div>
 
             <div class="sub-section qc-type" id="tissue-sample-quality-test">
-                <h5 id="tissue-sample-quality-test-heading"><i class="fas fa-ruler-combined"></i> Tissue sample quality test</h5>
+                <h5 id="tissue-sample-quality-test-heading">Tissue sample quality test</h5>
                 <p>Cellular activity is often measured by using Taipan blue staining, and the activity score should be >80% to meet the requirements. If the activity score is lower than this standard, it can be considered to use the appropriate technology to remove the dead cells to achieve the enrichment of cells, so as to improve the overall activity level of the sample. However, when the necrosis rate of the tissue is greater than 20%-50%, due to the high percentage of dead cells, it may cause serious interference with subsequent studies or assays, and such tissues can usually be directly discarded.</p>
                 <p>For the detection of tumour cell content, the percentage of tumour cells in tumour tissues can be effectively assessed using HE staining. When the proportion of tumour cells in the tumour tissue is >65% the sample is judged to be qualified.</p>
             </div>
 
             <div class="sub-section qc-type" id="dna-quality-test">
-                <h5 id="dna-quality-test-heading"><i class="fas fa-dna"></i> DNA quality test</h5>
+                <h5 id="dna-quality-test-heading">DNA quality test</h5>
                 <p>DNA quality testing is similar in principle and procedure to RNA quality testing. Firstly, the concentration and purity of DNA is determined by quantitative method based on UV absorbance using a spectrophotometer. The absorbance ratio of OD260/OD280 is the key index to measure the purity of DNA, and when the ratio reaches 1.8, it means that the DNA is in a relatively pure state. Secondly, the integrity of DNA was detected by agarose gel electrophoresis. Intact genomic DNA will show tight bands with high molecular weight characteristics during electrophoresis, and there is basically no or very little low molecular weight trailing phenomenon. The presence of trailing or diffuse bands in the electrophoresis result is an indication that the DNA has been degraded or broken. This result provides a visual basis for determining the suitability of sample handling and storage conditions for downstream molecular experiments to ensure the quality of the DNA used in the experiments.</p>
             </div>
 
             <div class="sub-section qc-type" id="rna-quality-test">
-                <h5 id="rna-quality-test-heading"><i class="fas fa-chart-bar"></i> RNA quality test</h5>
+                <h5 id="rna-quality-test-heading">RNA quality test</h5>
                 <p>RNA quality assessment focuses on purity and integrity, both of which determine the usability of RNA samples in biological experiments. Spectrophotometry is the key method in purity detection. Its principle is based on the characteristic absorption of nucleic acids at 260 nm and proteins at 280 nm, and the purity is judged by calculating the OD260/280 ratio. Typically, a ratio between 1.8 and 2.2 indicates a high purity of the RNA sample. However, this method does not directly reflect the integrity of the RNA and makes it difficult to identify other impurities. The choice of buffer for the measurement is equally important; Tris or TE buffers are superior to water in providing a stable OD260/280 ratio. To compensate for the shortcomings of spectrophotometry, there is a trend towards a multi-wavelength OD synthesis judgement strategy covering wavelengths of 240 nm and 320 nm, which are used to capture potential contaminants and background absorption information, respectively. Analysing the changes of OD260/240 and OD260/320 ratios can identify other contaminants in the samples in depth, thus enhancing the accuracy of RNA sample quality assessment and providing reliable support for subsequent biological experiments.</p>
                 <p>For integrity assessment, the RNA integrity value (RIN) assay is the core tool, which utilises microfluidic capillary electrophoresis to obtain RIN values ranging from 1 (fully degraded) to 10 (fully intact). Typically, a RIN≥7 is considered the critical threshold, reflecting the overall quality of the RNA. RNA extracted from fresh tissues usually exhibits higher RIN values, whereas RIN values of formalin-fixed paraffin-embedded (FFPE) tissues tend to be concentrated in the range of 2-5, which affects the success rate of RNA-seq experiments. Therefore, factors such as sample storage time, environmental conditions and fixation time need to be considered in experimental planning to ensure the accuracy and reliability of experimental results.</p>
             </div>
 
             <div class="sub-section qc-type" id="protein-quality-test">
-                <h5 id="protein-quality-test-heading"><i class="fas fa-project-diagram"></i> Protein quality test</h5>
+                <h5 id="protein-quality-test-heading">Protein quality test</h5>
                 <p>BCA protein assay kit (using bovine serum albumin as the standard) is used to determine the protein concentration, by measuring the absorbance of the sample at a specific wavelength, and calculating the protein concentration according to the standard curve, in the assay can be used to eliminate interfering substances in the BCA protein assay by using the DOC and TCA to precipitate proteins, so as to improve the accuracy and reliability of the quantification of proteins. Using the traditional method of Western blot to detect protein quality, if the specific bands of the target protein can be detected, and the bands are clear and without obvious trailing or dispersion, it indicates that the extracted proteins are not degraded, and the quality of the proteins is good.</p>
             </div>
         </section>
     </main>
+    <aside class="page-toc">
+        <nav class="toc-nav">
+            <h3>On This Page</h3>
+            <ul>
+                <li>
+                    <a href="#quality-management">Quality Management</a>
+                    <ul>
+                        <li><a href="#tissue">Tissue</a></li>
+                        <li><a href="#blood">Blood</a></li>
+                        <li><a href="#urine">Urine</a></li>
+                        <li><a href="#saliva">Saliva</a></li>
+                        <li><a href="#faeces">Faeces</a></li>
+                    </ul>
+                </li>
+                <li><a href="#aliquoting">Sample Aliquoting</a></li>
+                <li><a href="#transport">Sample Transport</a></li>
+                <li>
+                    <a href="#qc">Quality Control</a>
+                    <ul>
+                        <li><a href="#tissue-sample-quality-test">Tissue Sample Quality</a></li>
+                        <li><a href="#dna-quality-test">DNA Quality</a></li>
+                        <li><a href="#rna-quality-test">RNA Quality</a></li>
+                        <li><a href="#protein-quality-test">Protein Quality</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    </div>
 
     <footer>
-        <p>&copy; 2024 A framework for Multi-Omics based Biobank | <i class="fas fa-envelope"></i> Contact Us: fuyang@zzu.edu.cn</p>
+        <div class="footer-content">
+            <div class="footer-main">
+                <p class="footer-title">3M Framework for Multi-omics Biobank Development</p>
+                <p class="footer-institution">Department of Gastrointestinal Surgery, The First Affiliated Hospital of Zhengzhou University, Zhengzhou 450052, China</p>
+            </div>
+            <div class="footer-meta">
+                <p>Corresponding authors: Yang Fu (<a href="mailto:fuyang@zzu.edu.cn">fuyang@zzu.edu.cn</a>) &middot; Zhen Yang (<a href="mailto:13526685689@163.com">13526685689@163.com</a>)</p>
+                <p>&copy; 2024 Yang Lab. All sample collection approved by the Ethics Committee of The First Affiliated Hospital of Zhengzhou University.</p>
+                <p class="footer-update">Last updated: 2025</p>
+            </div>
+        </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate elements when they come into view
-            const sections = document.querySelectorAll('section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 }); // Adjust threshold for triggering earlier
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
-</html> 
+</html>

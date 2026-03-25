@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom styles -->
@@ -16,36 +16,36 @@
 <body>
     <header>
         <div class="header-content">
-            <h1>A 3M Framework for Multi-omics Biobank Development</h1>
+            <a href="index.html" class="site-name">3M Framework</a>
+            <nav>
+                <ul>
+                    <li><a href="introduction.html">Introduction</a></li>
+                    <li><a href="omics.html">Omics Requirements</a></li>
+                    <li><a href="sample_management.html">Sample Management</a></li>
+                    <li><a href="ethics.html" class="active">Ethics &amp; Security</a></li>
+                    <li><a href="workflow.html">Biobank Workflow</a></li>
+                    <li><a href="discussion.html">Discussion</a></li>
+                    <li><a href="authors.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="introduction.html"><i class="fas fa-book-open"></i> Introduction</a></li>
-                <li><a href="omics.html"><i class="fas fa-dna"></i> Omics Requirements</a></li>
-                <li><a href="sample_management.html"><i class="fas fa-vials"></i> Sample Management</a></li>
-                <li><a href="ethics.html" class="active"><i class="fas fa-file-contract"></i> Ethics & Security</a></li>
-                <li><a href="workflow.html"><i class="fas fa-project-diagram"></i> Biobank Workflow</a></li>
-                <li><a href="authors.html"><i class="fas fa-users"></i> Contact Us</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main>
         <div class="page-header">
-            <h2><i class="fas fa-file-contract"></i> Ethics & Security</h2>
+            <h2>Ethics & Security</h2>
             <div class="breadcrumb">
-                <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> Ethics & Security
+                <a href="index.html">Home</a> / Ethics & Security
             </div>
         </div>
 
-        <section id="ethical-security" class="card content-section">
-            <h3><i class="fas fa-shield-alt"></i> Ethical and Security Considerations</h3>
+        <section id="ethical-security" class="content-section">
+            <h3>Ethical and Security Considerations</h3>
             <p>The long-term development of a biosample bank needs to strike a balance between scientific value and ethical compliance, and all samples and data collection should be carried out after obtaining the informed consent of the donor, in order to protect the rights and interests of both the donor and the collector and avoid legal disputes. The informed consent form should be signed with respect to the donor's wishes, religious beliefs and cultural level, ensuring that it is signed in a sober, fair, uncoerced and fully understood manner, and in a written form that specifies the rights and responsibilities of both parties, and is completed prior to the collection of the samples and permanently stored. Despite the initial establishment of the informed consent framework, there are still pitfalls in its practical application, e.g., is there harm to the patient during the sampling process, the magnitude of that harm, and is there compensation? Does the patient have sufficient informed consent? Is it ethical to collect the sample? Biological sample safety or data security issues and privacy concerns.</p>
             <p>According to the definition of harm in Munshi's study, the sampling and testing operations of the biobank did not involve behaviours that could cause harm to patients, and all related costs were borne by the biobank, without infringing on the economic interests of patients, and secondly, after the implementation of the standardised synergistic operation plan between clinical treatment and the biobank, the psychological and physical burden of secondary sampling on patients was also avoided. Secondly, after the implementation of the standardised synergistic operation programme between clinical treatment and biobanks, the psychological and physical burden of secondary sampling on patients is avoided. For this kind of social welfare behaviour of donating samples to biobanks, although the final results of the study are contributed to the society, the patients cannot directly benefit from the relevant research, so the biobanks should still give appropriate compensation for this kind of public welfare behaviour, which can help to attract more people to participate in the donation. When obtaining patients' informed consent for biobanking, differences in individual comprehension and age need to be taken into account to ensure effective communication, especially for vulnerable groups, biobanks should develop easy-to-understand protocols, such as using colloquial expressions and avoiding jargon. For patients who do not have the right to make autonomous decisions (e.g. children), their legal guardians may sign on their behalf. The information kept in biospecimen repositories covers clinical profile data, biomaterial data and demographic data. When dealing with data or samples that contain personal privacy, donors' concerns about the exposure of private information may affect their willingness to participate. Therefore, before obtaining informed consent, it is necessary to explain in detail to the target individuals the de-identification protection measures of the biospecimen repository for their personal information in order to eliminate their concerns and enhance their willingness to participate. To ensure the safety of biological samples and related data, all activities of the biospecimen repository should be carried out under the strict review and supervision of the ethics committee. Especially when it comes to the use of biological samples, such as the export of samples collected in China to foreign countries, there must be justifiable reasons to ensure that all processes are legal and compliant, and the entire process is subject to the supervision of the ethics committee.</p>
 
             <div class="sub-section downloads" id="ethical-documents-download">
-                <h3><i class="fas fa-download"></i> Ethical Documents Download</h3>
+                <h3>Ethical Documents Download</h3>
                 <div class="download-category">
                     <h4 id="ethical-documents">Ethical Documents</h4>
                  <ul>
@@ -59,25 +59,17 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 A framework for Multi-Omics based Biobank | <i class="fas fa-envelope"></i> Contact Us: fuyang@zzu.edu.cn</p>
+        <div class="footer-content">
+            <div class="footer-main">
+                <p class="footer-title">3M Framework for Multi-omics Biobank Development</p>
+                <p class="footer-institution">Department of Gastrointestinal Surgery, The First Affiliated Hospital of Zhengzhou University, Zhengzhou 450052, China</p>
+            </div>
+            <div class="footer-meta">
+                <p>Corresponding authors: Yang Fu (<a href="mailto:fuyang@zzu.edu.cn">fuyang@zzu.edu.cn</a>) &middot; Zhen Yang (<a href="mailto:13526685689@163.com">13526685689@163.com</a>)</p>
+                <p>&copy; 2024 Yang Lab. All sample collection approved by the Ethics Committee of The First Affiliated Hospital of Zhengzhou University.</p>
+                <p class="footer-update">Last updated: 2025</p>
+            </div>
+        </div>
     </footer>
-
-    <script>
-        // Animate elements when they come into view (optional, keep if desired)
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
 </html> 

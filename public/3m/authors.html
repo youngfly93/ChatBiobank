@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom styles -->
@@ -16,30 +16,30 @@
 <body>
     <header>
         <div class="header-content">
-            <h1>A 3M Framework for Multi-omics Biobank Development</h1>
+            <a href="index.html" class="site-name">3M Framework</a>
+            <nav>
+                <ul>
+                    <li><a href="introduction.html">Introduction</a></li>
+                    <li><a href="omics.html">Omics Requirements</a></li>
+                    <li><a href="sample_management.html">Sample Management</a></li>
+                    <li><a href="ethics.html">Ethics &amp; Security</a></li>
+                    <li><a href="workflow.html">Biobank Workflow</a></li>
+                    <li><a href="discussion.html">Discussion</a></li>
+                    <li><a href="authors.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="introduction.html"><i class="fas fa-book-open"></i> Introduction</a></li>
-                <li><a href="omics.html"><i class="fas fa-dna"></i> Omics Requirements</a></li>
-                <li><a href="sample_management.html"><i class="fas fa-vials"></i> Sample Management</a></li>
-                <li><a href="ethics.html"><i class="fas fa-file-contract"></i> Ethics & Security</a></li>
-                <li><a href="workflow.html"><i class="fas fa-project-diagram"></i> Biobank Workflow</a></li>
-                <li><a href="authors.html" class="active"><i class="fas fa-users"></i> Contact Us</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main>
         <div class="page-header">
-            <h2><i class="fas fa-users"></i> Contact Us</h2>
+            <h2>Contact Us</h2>
             <div class="breadcrumb">
-                <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i> Contact Us
+                <a href="index.html">Home</a> / Contact Us
             </div>
         </div>
 
-        <section id="authors" class="card content-section">
+        <section id="authors" class="content-section">
             <div class="author-list">
                 <div class="author-grid">
                     <p class="author-names">Zhao Sun<sup>1#</sup>, Xuejiao Xia<sup>1#</sup>, Rui Deng<sup>1</sup>, Jiahui Li<sup>1</sup>, Chang Sun<sup>1</sup>, Guanghui Li<sup>1</sup>, Mingliang Yuan<sup>1</sup>, Sanfei Peng<sup>1</sup>, Xiang-yang Yin<sup>1</sup>, Zhiwei Zhao<sup>1</sup>, Xinhua Dong<sup>1</sup>, Qi Liu<sup>1</sup>, Zhen Yang<sup>1*</sup>, Yang Fu<sup>1*</sup></p>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="corresponding-author">
-                    <h3><i class="fas fa-envelope"></i> Corresponding Authors</h3>
+                    <h3>Corresponding Authors</h3>
                     <div class="contact-info">
                         <div class="contact-card">
                             <div class="contact-name">Yang Fu</div>
@@ -69,25 +69,18 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 3M Framework: Targeting for Multi-omics-based Biobank | <i class="fas fa-envelope"></i> Contact us: fuyang@zzu.edu.cn</p>
+        <div class="footer-content">
+            <div class="footer-main">
+                <p class="footer-title">3M Framework for Multi-omics Biobank Development</p>
+                <p class="footer-institution">Department of Gastrointestinal Surgery, The First Affiliated Hospital of Zhengzhou University, Zhengzhou 450052, China</p>
+            </div>
+            <div class="footer-meta">
+                <p>Corresponding authors: Yang Fu (<a href="mailto:fuyang@zzu.edu.cn">fuyang@zzu.edu.cn</a>) &middot; Zhen Yang (<a href="mailto:13526685689@163.com">13526685689@163.com</a>)</p>
+                <p>&copy; 2024 Yang Lab. All sample collection approved by the Ethics Committee of The First Affiliated Hospital of Zhengzhou University.</p>
+                <p class="footer-update">Last updated: 2025</p>
+            </div>
+        </div>
     </footer>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate elements when they come into view
-            const sections = document.querySelectorAll('section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.2 });
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
 </body>
 </html>
