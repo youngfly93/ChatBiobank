@@ -13,6 +13,14 @@
 </head>
 <body>
     <div class="app-container">
+        <!-- 移动端顶部栏（独立于 sidebar，始终可见） -->
+        <div class="mobile-header">
+            <span class="mobile-brand">BioMentor 3M</span>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
         <!-- 侧边栏 -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-body">
@@ -33,21 +41,14 @@
                             <div class="link-icon">
                                 <i class="fas fa-plus"></i>
                             </div>
-                            <span class="link-text">新对话</span>
+                            <span class="link-text">New Chat</span>
                         </a>
 
                         <a href="#" class="sidebar-link">
                             <div class="link-icon">
-                                <i class="fas fa-message"></i>
+                                <i class="fas fa-clock-rotate-left"></i>
                             </div>
-                            <span class="link-text">对话历史</span>
-                        </a>
-
-                        <a href="3m/" class="framework-link" target="_blank">
-                            <div class="link-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <span class="link-text">3M Framework</span>
+                            <span class="link-text">History</span>
                         </a>
                     </div>
 
@@ -60,23 +61,23 @@
                     </div>
                 </div>
 
-                <!-- 底部用户区域 -->
+                <!-- 底部区域 -->
                 <div class="sidebar-bottom">
+                    <a href="3m/" class="framework-link" target="_blank">
+                        <div class="link-icon">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </div>
+                        <span class="link-text">Explore 3M Framework</span>
+                    </a>
+                    <div class="section-divider"></div>
                     <div class="sidebar-link user-profile" id="userProfile">
                         <div class="link-icon">
                             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face&auto=format"
                                  alt="User" class="user-avatar">
                         </div>
-                        <span class="link-text">AI用户</span>
+                        <span class="link-text">Researcher</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- 移动端顶部栏 -->
-            <div class="mobile-header">
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
 
             <!-- 移动端侧边栏遮罩 -->
@@ -92,6 +93,7 @@
                     <h1 class="title-text">
                         <span class="shiny-text">BioMentor 3M</span>
                     </h1>
+                    <p class="title-tagline">Grounded in the 3M framework for multi-omics biobank protocols, ethics, and workflows.</p>
                 </div>
             </div>
 
@@ -110,7 +112,7 @@
                             <textarea
                                 id="messageInput"
                                 class="message-input"
-                                placeholder="How can I help you today?"
+                                placeholder="Ask about biobank protocols, sample requirements, or omics specifications..."
                                 rows="1"
                             ></textarea>
                             <div class="input-actions">
@@ -125,23 +127,23 @@
                         </div>
                     </form>
 
-                    <!-- 功能按钮 -->
+                    <!-- 功能按钮：与 3M Framework 栏目名对齐 -->
                     <div class="feature-buttons">
                         <button class="feature-btn">
                             <i class="fas fa-dna"></i>
-                            <span>Omics</span>
+                            <span>Omics Requirements</span>
                         </button>
                         <button class="feature-btn">
                             <i class="fas fa-vials"></i>
-                            <span>Samples</span>
+                            <span>Sample Management</span>
                         </button>
                         <button class="feature-btn">
                             <i class="fas fa-file-contract"></i>
-                            <span>Ethics</span>
+                            <span>Ethics & Security</span>
                         </button>
                         <button class="feature-btn">
                             <i class="fas fa-project-diagram"></i>
-                            <span>Workflow</span>
+                            <span>Biobank Workflow</span>
                         </button>
                     </div>
                 </div>

@@ -736,6 +736,36 @@ footer {
     margin-top: var(--space-3);
 }
 
+/* Ask BioMentor floating link */
+.ask-biomenthor {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background-color: var(--ink);
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    border-radius: 24px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background-color 0.15s, transform 0.15s;
+    z-index: 50;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.ask-biomenthor:hover {
+    background-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.ask-biomenthor i {
+    font-size: 0.9rem;
+}
+
 /* Responsive */
 @media (max-width: 1100px) {
     .page-layout {

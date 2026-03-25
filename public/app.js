@@ -1,3 +1,11 @@
+// 配置 marked：所有链接在新标签页打开
+const renderer = new marked.Renderer();
+renderer.link = function (href, title, text) {
+    const titleAttr = title ? ` title="${title}"` : '';
+    return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`;
+};
+marked.setOptions({ renderer });
+
 // 应用状态管理
 const appState = {
     conversationId: null,
@@ -513,17 +521,17 @@ function initializeEventListeners() {
             let prompt = '';
             
             switch (feature) {
-                case 'Write':
-                    prompt = '帮我写一篇';
+                case 'Omics Requirements':
+                    prompt = 'What are the sample volume requirements for different omics technologies?';
                     break;
-                case 'Learn':
-                    prompt = '教我学习';
+                case 'Sample Management':
+                    prompt = 'How should tissue and blood samples be collected and stored?';
                     break;
-                case 'Code':
-                    prompt = '帮我编写代码';
+                case 'Ethics & Security':
+                    prompt = 'What are the ethical requirements for biobank operations?';
                     break;
-                case 'Life stuff':
-                    prompt = '给我一些生活建议';
+                case 'Biobank Workflow':
+                    prompt = 'Describe the biobank sample accession and release process.';
                     break;
             }
             
