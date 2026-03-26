@@ -16,30 +16,29 @@ No test framework or linter is configured.
 
 Copy `.env.example` to `.env` and fill in values. `dotenv` is loaded in `server.js` before config is read. For Vercel, set env vars via the Vercel dashboard.
 
-- `DIFY_API_KEY` — Required for Dify API
-- `DIFY_API_BASE_URL` — Defaults to `https://api.dify.ai/v1`
+- `MOONSHOT_API_KEY` — Required for Kimi K2.5 API
+- `MOONSHOT_API_BASE_URL` — Defaults to `https://api.moonshot.cn/v1`
+- `MOONSHOT_MODEL` — Defaults to `kimi-k2.5`
 - `PORT` — Server port (default: 3000)
 
 ## Architecture
 
-Node.js/Express chat application that proxies requests to the Dify API with a Claude-style UI. The entire frontend is vanilla JS (no framework, no build step).
+Node.js/Express chat application powered by Kimi K2.5 with built-in RAG (Retrieval-Augmented Generation) over the 3M Framework knowledge base. The entire frontend is vanilla JS (no framework, no build step).
 
 ### Dual Deployment: Traditional vs Vercel
 
-**Traditional** (`server.js`): Monolithic Express server using CommonJS (`require`) and `axios` for HTTP requests to Dify. Serves static files from `public/`.
+**Traditional** (`server.js`): Monolithic Express server using CommonJS (`require`). Uses `curl` subprocess for Kimi API streaming (to bypass WSL2 DNS issues). RAG engine in `lib/rag.js` reads HTML files from `public/3m/` and builds a knowledge base. Conversation history stored in-memory via `lib/conversations.js`.
 
-**Vercel** (`api/` directory): Separate serverless function handlers using ES modules (`import`) and native `fetch`. Each endpoint is its own file mirroring the Vercel file-based routing convention (`api/chat-messages/[taskId]/stop.js` for dynamic routes).
+**Vercel** (`api/` directory): Separate serverless function handlers using CommonJS (`module.exports`) and native `fetch`. Each endpoint is its own file following Vercel's file-based routing convention. `api/chat.js` has its own embedded RAG logic (reads `public/3m/*.html` at runtime). Conversations are stateless (no server-side history).
 
-`config.js` uses both `export default` and `module.exports` to support both module systems.
-
-`index.js` is a minimal Express SPA router used as Vercel's entry point for non-API routes.
+`vercel.json` configures `rewrites` for SPA fallback and `includeFiles` to bundle `public/3m/**` into the chat serverless function.
 
 ### API Endpoints
 
 | Endpoint | Method | Purpose |
 |---|---|---|
-| `/api/chat` | POST | Streaming chat via SSE (proxies Dify `/chat-messages`) |
-| `/api/files/upload` | POST | Image upload (10MB limit; png/jpg/jpeg/webp/gif) |
+| `/api/chat` | POST | Streaming chat via SSE (calls Kimi K2.5 `/chat/completions`) |
+| `/api/files/upload` | POST | Image upload (mock in Vercel) |
 | `/api/conversations` | GET | List conversations |
 | `/api/conversations/:id` | DELETE | Delete conversation |
 | `/api/messages` | GET | Message history for a conversation |
@@ -50,12 +49,12 @@ Node.js/Express chat application that proxies requests to the Dify API with a Cl
 - `app.js` — All client logic: state management (`appState` object), SSE stream parsing, conversation sidebar, file upload, mobile responsive sidebar toggle
 - `index.html` — SPA shell, loads `marked` from CDN for Markdown rendering
 - `styles.css` — Claude-style UI
+- `3m/*.html` — 3M Framework knowledge base pages (also served as static browsable content)
 
 State is client-side only. User ID is `'user-' + Date.now()` generated on page load — no persistence across sessions.
 
 ### Key Patterns
 
-- **SSE streaming**: Backend pipes Dify's streaming response directly to the client. Frontend reads with `ReadableStream` API, parses `data:` lines, and incrementally renders Markdown via `marked.parse()`.
-- **Conversation lifecycle**: First message creates a conversation (Dify assigns `conversation_id`). Sidebar history is populated on load via `/api/conversations` and synced from server.
-- **File upload divergence**: `server.js` uses `multer` + `form-data` to proxy uploads to Dify. The Vercel `api/files/upload.js` has a simplified mock — production Vercel deployment would need external storage.
-
+- **SSE streaming**: Backend calls Kimi K2.5 API with `stream: true`, parses OpenAI-compatible SSE chunks, and re-emits them in Dify-compatible format for the frontend. Frontend reads with `ReadableStream` API and incrementally renders Markdown via `marked.parse()`.
+- **RAG**: On startup (traditional) or first request (Vercel), all `public/3m/*.html` files are parsed with `cheerio`, converted to structured Markdown with source links, and injected into the system prompt as a complete knowledge base.
+- **Conversation lifecycle**: First message creates a conversation. Sidebar history is populated on load via `/api/conversations` and synced from server.
