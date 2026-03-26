@@ -6,11 +6,80 @@ renderer.link = function (href, title, text) {
 };
 marked.setOptions({ renderer });
 
+// Role definitions
+const ROLES = {
+    general: {
+        name: 'General',
+        placeholder: 'Ask about biobank protocols, sample requirements, or omics specifications...',
+        questions: [
+            { text: 'Sample volume requirements for omics?', icon: 'fa-dna' },
+            { text: 'How to collect and store tissue samples?', icon: 'fa-vials' },
+            { text: 'What is the sample accession process?', icon: 'fa-project-diagram' },
+            { text: 'Informed consent requirements?', icon: 'fa-file-contract' }
+        ]
+    },
+    collector: {
+        name: 'Sample Collector',
+        placeholder: 'Ask about collection protocols, processing timelines, storage conditions, transport...',
+        questions: [
+            { text: 'How soon must blood samples be processed after collection?', icon: 'fa-clock' },
+            { text: 'How to choose the right blood collection tube type?', icon: 'fa-vial' },
+            { text: 'What is the warm ischemia time limit for tissue?', icon: 'fa-temperature-low' },
+            { text: 'Fecal sample collection and temporary storage?', icon: 'fa-box' },
+            { text: 'How much dry ice is needed for sample transport?', icon: 'fa-truck' }
+        ]
+    },
+    manager: {
+        name: 'Biobank Admin',
+        placeholder: 'Ask about accession/release workflows, coding rules, documentation, inventory...',
+        questions: [
+            { text: 'What documents are needed for sample accession?', icon: 'fa-file-alt' },
+            { text: 'What is the sample coding format?', icon: 'fa-barcode' },
+            { text: 'What is the sample release approval process?', icon: 'fa-clipboard-check' },
+            { text: 'Data accession and release procedures?', icon: 'fa-database' }
+        ]
+    },
+    researcher: {
+        name: 'Researcher',
+        placeholder: 'Ask about omics sample requirements, technique selection, sample application...',
+        questions: [
+            { text: 'How much tissue is needed for proteomics DIA?', icon: 'fa-weight' },
+            { text: 'Blood volume requirements for transcriptomics?', icon: 'fa-dna' },
+            { text: 'Sample requirements for phosphoproteomics?', icon: 'fa-atom' },
+            { text: 'Compare sample volumes across metabolomics techniques?', icon: 'fa-chart-bar' },
+            { text: 'How to apply for biobank samples?', icon: 'fa-hand-holding' }
+        ]
+    },
+    qc: {
+        name: 'QC Specialist',
+        placeholder: 'Ask about quality testing standards, QC thresholds, inspection protocols...',
+        questions: [
+            { text: 'What is the acceptable RIN value for RNA quality?', icon: 'fa-check-circle' },
+            { text: 'DNA purity OD260/280 ratio requirements?', icon: 'fa-search' },
+            { text: 'Tissue viability and tumor cell content standards?', icon: 'fa-microscope' },
+            { text: 'Routine sampling inspection frequency and ratio?', icon: 'fa-calendar-check' },
+            { text: 'How to handle and dispose of non-conforming samples?', icon: 'fa-exclamation-triangle' }
+        ]
+    },
+    ethics: {
+        name: 'Ethics Officer',
+        placeholder: 'Ask about informed consent, privacy protection, ethical review procedures...',
+        questions: [
+            { text: 'Specific requirements for signing informed consent?', icon: 'fa-file-signature' },
+            { text: 'How is patient information de-identified?', icon: 'fa-user-shield' },
+            { text: 'Consent process for minors and vulnerable groups?', icon: 'fa-child' },
+            { text: 'Requirements for cross-border sample transfer?', icon: 'fa-globe' },
+            { text: 'Donor withdrawal and consent revocation process?', icon: 'fa-undo' }
+        ]
+    }
+};
+
 // 应用状态管理
 const appState = {
     conversationId: null,
     messages: [],
-    user: 'user-' + Date.now()
+    user: 'user-' + Date.now(),
+    currentRole: 'general'
 };
 
 // DOM 元素
@@ -130,7 +199,8 @@ async function sendMessage(message, fileData = null) {
             query: message,
             user: appState.user,
             conversation_id: appState.conversationId,
-            response_mode: 'streaming'
+            response_mode: 'streaming',
+            role: appState.currentRole
         };
         
         // 如果有文件，添加文件信息
@@ -433,11 +503,70 @@ function startNewChat() {
     toggleWelcomeSection(true);
     elements.messageInput.value = '';
     autoResizeTextarea();
-    
+
     // 移除所有历史项的激活状态
     elements.chatHistory.querySelectorAll('.history-item').forEach(item => {
         item.classList.remove('active');
     });
+
+    // 恢复当前角色的 UI 状态（placeholder + 示例问题）
+    switchRole(appState.currentRole);
+}
+
+// 切换角色
+function switchRole(roleId) {
+    const role = ROLES[roleId];
+    if (!role) return;
+
+    appState.currentRole = roleId;
+
+    // 更新角色卡片选中状态
+    document.querySelectorAll('.role-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.role === roleId);
+    });
+
+    // 更新输入框 placeholder
+    elements.messageInput.placeholder = role.placeholder;
+
+    // 更新功能按钮（示例问题）
+    const featureContainer = document.querySelector('.feature-buttons');
+    featureContainer.innerHTML = role.questions.map(q =>
+        `<button class="feature-btn">
+            <i class="fas ${q.icon}"></i>
+            <span>${q.text}</span>
+        </button>`
+    ).join('');
+
+    // 重新绑定功能按钮事件
+    document.querySelectorAll('.feature-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const text = btn.querySelector('span').textContent;
+            elements.messageInput.value = text;
+            elements.messageInput.focus();
+            autoResizeTextarea();
+        });
+    });
+
+    // 更新侧边栏角色指示器
+    updateRoleIndicator(roleId, role.name);
+}
+
+// Update sidebar role indicator
+function updateRoleIndicator(roleId, roleName) {
+    let indicator = document.getElementById('roleIndicator');
+    if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.id = 'roleIndicator';
+        indicator.className = 'role-indicator';
+        const newChatBtn = document.getElementById('newChatBtn');
+        newChatBtn.parentNode.insertBefore(indicator, newChatBtn.nextSibling);
+    }
+    if (roleId === 'general') {
+        indicator.style.display = 'none';
+    } else {
+        indicator.style.display = 'flex';
+        indicator.innerHTML = `<i class="fas fa-user-tag"></i><span>${roleName}</span>`;
+    }
 }
 
 // 初始化事件监听器
@@ -518,30 +647,20 @@ function initializeEventListeners() {
         elements.mobileOverlay.addEventListener('click', closeMobileSidebar);
     }
     
-    // 监听功能按钮
-    elements.featureButtons.forEach(btn => {
+    // 监听功能按钮（初始绑定，后续由 switchRole 重新绑定）
+    document.querySelectorAll('.feature-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const feature = btn.querySelector('span').textContent;
-            let prompt = '';
-            
-            switch (feature) {
-                case 'Omics Requirements':
-                    prompt = 'What are the sample volume requirements for different omics technologies?';
-                    break;
-                case 'Sample Management':
-                    prompt = 'How should tissue and blood samples be collected and stored?';
-                    break;
-                case 'Ethics & Security':
-                    prompt = 'What are the ethical requirements for biobank operations?';
-                    break;
-                case 'Biobank Workflow':
-                    prompt = 'Describe the biobank sample accession and release process.';
-                    break;
-            }
-            
-            elements.messageInput.value = prompt;
+            const text = btn.querySelector('span').textContent;
+            elements.messageInput.value = text;
             elements.messageInput.focus();
             autoResizeTextarea();
+        });
+    });
+
+    // 监听角色卡片点击
+    document.querySelectorAll('.role-card').forEach(card => {
+        card.addEventListener('click', () => {
+            switchRole(card.dataset.role);
         });
     });
 }
@@ -549,6 +668,8 @@ function initializeEventListeners() {
 // 初始化应用
 async function initializeApp() {
     initializeEventListeners();
+    // 应用默认角色的 placeholder 和示例问题
+    switchRole('general');
     autoResizeTextarea();
     elements.messageInput.focus();
     

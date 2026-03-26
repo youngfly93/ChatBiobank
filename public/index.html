@@ -102,6 +102,55 @@
                     <h1 class="title-text">ChatBiobank</h1>
                     <p class="title-tagline">Grounded in the 3M framework for multi-omics biobank protocols, ethics, and workflows.</p>
                 </div>
+
+                <!-- Role Selection Cards -->
+                <div class="role-section">
+                    <p class="role-hint">Select a role for tailored answers</p>
+                    <div class="role-grid" id="roleGrid">
+                        <button class="role-card active" data-role="general">
+                            <div class="role-icon"><i class="fas fa-comments"></i></div>
+                            <div class="role-info">
+                                <span class="role-name">General</span>
+                                <span class="role-desc">Cross-role Q&A</span>
+                            </div>
+                        </button>
+                        <button class="role-card" data-role="collector">
+                            <div class="role-icon"><i class="fas fa-syringe"></i></div>
+                            <div class="role-info">
+                                <span class="role-name">Sample Collector</span>
+                                <span class="role-desc">Collection, processing, transport</span>
+                            </div>
+                        </button>
+                        <button class="role-card" data-role="manager">
+                            <div class="role-icon"><i class="fas fa-warehouse"></i></div>
+                            <div class="role-info">
+                                <span class="role-name">Biobank Admin</span>
+                                <span class="role-desc">Accession, release, coding</span>
+                            </div>
+                        </button>
+                        <button class="role-card" data-role="researcher">
+                            <div class="role-icon"><i class="fas fa-flask"></i></div>
+                            <div class="role-info">
+                                <span class="role-name">Researcher</span>
+                                <span class="role-desc">Omics requirements, sample use</span>
+                            </div>
+                        </button>
+                        <button class="role-card" data-role="qc">
+                            <div class="role-icon"><i class="fas fa-microscope"></i></div>
+                            <div class="role-info">
+                                <span class="role-name">QC Specialist</span>
+                                <span class="role-desc">Testing standards, inspection</span>
+                            </div>
+                        </button>
+                        <button class="role-card" data-role="ethics">
+                            <div class="role-icon"><i class="fas fa-balance-scale"></i></div>
+                            <div class="role-info">
+                                <span class="role-name">Ethics Officer</span>
+                                <span class="role-desc">Consent, privacy, compliance</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- 聊天消息区域 -->
@@ -136,19 +185,19 @@
                     <div class="feature-buttons">
                         <button class="feature-btn">
                             <i class="fas fa-dna"></i>
-                            <span>Omics Requirements</span>
+                            <span>Sample volume requirements for omics?</span>
                         </button>
                         <button class="feature-btn">
                             <i class="fas fa-vials"></i>
-                            <span>Sample Management</span>
-                        </button>
-                        <button class="feature-btn">
-                            <i class="fas fa-file-contract"></i>
-                            <span>Ethics & Security</span>
+                            <span>How to collect and store tissue samples?</span>
                         </button>
                         <button class="feature-btn">
                             <i class="fas fa-project-diagram"></i>
-                            <span>Biobank Workflow</span>
+                            <span>What is the sample accession process?</span>
+                        </button>
+                        <button class="feature-btn">
+                            <i class="fas fa-file-contract"></i>
+                            <span>Informed consent requirements?</span>
                         </button>
                     </div>
                 </div>

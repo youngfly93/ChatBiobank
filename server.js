@@ -52,7 +52,7 @@ function callKimiStream(messages) {
 
 // 聊天 API 路由 —— 调用 Kimi K2.5，SSE 格式转换为前端期望的 Dify 格式
 app.post('/api/chat', async (req, res) => {
-    const { query, user, conversation_id } = req.body;
+    const { query, user, conversation_id, role } = req.body;
     let conversationId = conversation_id;
     const messageId = store.generateId();
     const taskId = store.generateId();
@@ -67,8 +67,8 @@ app.post('/api/chat', async (req, res) => {
         // 记录用户消息
         store.addMessage(conversationId, 'user', query);
 
-        // 构建消息数组：system prompt（含全量知识库） + 历史对话
-        const systemPrompt = rag.buildSystemPrompt();
+        // 构建消息数组：system prompt（含全量知识库 + 角色指令） + 历史对话
+        const systemPrompt = rag.buildSystemPrompt(role);
         const chatHistory = store.getChatHistory(conversationId);
         const messages = [
             { role: 'system', content: systemPrompt },
