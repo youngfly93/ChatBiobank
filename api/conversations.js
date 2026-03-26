@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     if (req.method === 'GET') {
         return res.json({ data: [], has_more: false, limit: 20 });
     }
@@ -6,4 +6,4 @@ export default async function handler(req, res) {
         return res.status(204).send();
     }
     res.status(405).json({ error: 'Method not allowed' });
-}
+};

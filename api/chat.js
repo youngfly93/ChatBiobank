@@ -1,6 +1,6 @@
-import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
-import * as cheerio from 'cheerio';
+const { readFileSync, existsSync } = require('fs');
+const { join } = require('path');
+const cheerio = require('cheerio');
 
 const HTML_FILES = ['introduction.html','omics.html','sample_management.html','ethics.html','workflow.html','discussion.html','authors.html'];
 const CONTENT_DIR = join(process.cwd(), 'public', '3m');
@@ -84,7 +84,7 @@ When answering:
 ${getKnowledgeBase()}`;
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
     try {
@@ -141,6 +141,10 @@ export default async function handler(req, res) {
         }
     } catch (error) {
         console.error('Chat API error:', error.message);
-        res.status(500).json({ error: error.message });
+        if (!res.headersSent) {
+            res.status(500).json({ error: error.message });
+        } else {
+            res.end();
+        }
     }
-}
+};
