@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/chat.js": {
-      "maxDuration": 30
+      "maxDuration": 60
     },
     "api/files/upload.js": {
       "maxDuration": 10
@@ -15,5 +15,9 @@
     "api/chat-messages/[taskId]/stop.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/3m/(.*)", "destination": "/3m/$1" },
+    { "source": "/((?!api|3m).*)", "destination": "/" }
+  ]
 }
