@@ -1,23 +1,14 @@
 {
+  "buildCommand": "",
+  "outputDirectory": "public",
   "functions": {
     "api/chat.js": {
       "maxDuration": 60
-    },
-    "api/files/upload.js": {
-      "maxDuration": 10
-    },
-    "api/conversations.js": {
-      "maxDuration": 10
-    },
-    "api/messages.js": {
-      "maxDuration": 10
-    },
-    "api/chat-messages/[taskId]/stop.js": {
-      "maxDuration": 10
     }
   },
   "rewrites": [
+    { "source": "/api/chat", "destination": "/api/chat.js" },
     { "source": "/3m/(.*)", "destination": "/3m/$1" },
-    { "source": "/((?!api|3m).*)", "destination": "/" }
+    { "source": "/((?!api|3m|_next).*)", "destination": "/index.html" }
   ]
 }
