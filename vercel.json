@@ -1,14 +1,11 @@
 {
-  "buildCommand": "",
-  "outputDirectory": "public",
   "functions": {
     "api/chat.js": {
       "maxDuration": 60
     }
   },
-  "rewrites": [
-    { "source": "/api/chat", "destination": "/api/chat.js" },
-    { "source": "/3m/(.*)", "destination": "/3m/$1" },
-    { "source": "/((?!api|3m|_next).*)", "destination": "/index.html" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.js" }
   ]
 }
